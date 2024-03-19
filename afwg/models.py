@@ -100,7 +100,7 @@ class Faculty_user(User):
     
 @receiver(post_save, sender= User)
 def create_user_profile(sender, instance, created, **kwargs):
-    if instance.faculty == True:
+    if created and instance.faculty == True:
         Faculty.objects.create(FacultyName=instance,)
     
 class Department(models.Model):

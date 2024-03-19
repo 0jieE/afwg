@@ -150,7 +150,7 @@ def add_department(request):
 
 
 def edit_department(request,pk):
-        department = get_object_or_404(department, pk=pk)
+        department = get_object_or_404(Department, pk=pk)
         if(request.method == 'POST'):
                 form = DepartmentForm(request.POST, request.FILES, instance=department)
         else:    
@@ -159,18 +159,16 @@ def edit_department(request,pk):
 
 
 def delete_department(request,pk):
-        department = get_object_or_404(department, pk=pk)
+        department = get_object_or_404(Department, pk=pk)
         data = dict()
         if request.method == 'POST':
-                department.delete()
-                data['form_is_valid'] = True
-                departments= department.objects.all()
-                data['department_list'] = render_to_string('admin_user/tables/department/department-list.html',{'department':department})
+            department.delete()
+            data['form_is_valid'] = True
+            departments= Department.objects.all()
+            data['department_list'] = render_to_string('admin_user/tables/department/department_list.html',{'departments':departments})
         else:    
-                context = {'department':department}
-                data['html_form'] = render_to_string('admin_user/tables/department/delete_department.html',
-                context,
-                request=request)
+            context = {'department':department}
+            data['html_form'] = render_to_string('admin_user/tables/department/delete_department.html',context,request=request)
         return JsonResponse(data)
 
 
@@ -181,8 +179,8 @@ def save_department(request, form, template_name):
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            department= department.objects.all()
-            data['department_list'] = render_to_string('admin_user/tables/department/department-list.html', {'department':department})
+            departments= Department.objects.all()
+            data['department_list'] = render_to_string('admin_user/tables/department/department_list.html', {'departments':departments})
         else:
             data['form_is_valid'] = False
 

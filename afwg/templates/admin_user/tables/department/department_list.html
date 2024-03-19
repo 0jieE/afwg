@@ -4,10 +4,10 @@
     <td>{{d.DepartmentHead}}</td>
 
     <td>
-        <button class="btn btn-outline-primary btn-sm js-edit-department" data-url="{% url "edit-department" a.pk %}">
+        <button class="btn btn-outline-primary btn-sm js-edit-department" data-url="{% url "edit-department" d.pk %}">
             <i class="fas fa-edit">Edit</i>
         </button>
-        <button class="btn btn-outline-primary btn-sm js-delete-department" data-url="{% url "delete-department" a.pk %}">
+        <button class="btn btn-outline-primary btn-sm js-delete-department" data-url="{% url "delete-department" d.pk %}">
             <i class="fas fa-trash">Delete</i>
         </button>
     </td> 
