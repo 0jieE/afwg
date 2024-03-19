@@ -165,7 +165,7 @@ def delete_department(request,pk):
                 department.delete()
                 data['form_is_valid'] = True
                 departments= department.objects.all()
-                data['department_list'] = render_to_string('admin_user/tables/department/department-list.html',{'agencies':agencies})
+                data['department_list'] = render_to_string('admin_user/tables/department/department-list.html',{'department':department})
         else:    
                 context = {'department':department}
                 data['html_form'] = render_to_string('admin_user/tables/department/delete_department.html',
@@ -181,8 +181,8 @@ def save_department(request, form, template_name):
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            agencies= department.objects.all()
-            data['department_list'] = render_to_string('admin_user/tables/department/department-list.html', {'agencies':agencies})
+            department= department.objects.all()
+            data['department_list'] = render_to_string('admin_user/tables/department/department-list.html', {'department':department})
         else:
             data['form_is_valid'] = False
 
