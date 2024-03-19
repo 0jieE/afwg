@@ -7,12 +7,12 @@
 {% block content %}
 <div class="register-box">
   <div class="register-logo">
-    <a href="/"><b>Admin</b>LTE</a>
+    <a href="/"><b>AFWG</b></a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">Register as Admin</p>
 
       <form method="post">
         {% csrf_token %}
@@ -22,7 +22,7 @@
           {{field}}
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas {% if field.name == 'username' %} fa-user {% else %} {% if field.name == 'email' %} fa-envelope {% else %} fa-lock {% endif %} {% endif %}"></span>
+              <span class="fas {% if field.name == 'username' or field.name == 'first_name' or field.name == 'middle_name' or field.name == 'last_name'%} fa-user {% else %} {% if field.name == 'email' %} fa-envelope {% else %} fa-lock {% endif %} {% endif %}"></span>
             </div>
           </div>
         </div>

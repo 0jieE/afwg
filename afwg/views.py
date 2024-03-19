@@ -30,7 +30,7 @@ def login_view(request):
                 msg= 'invalid credentials'
         else:
             msg = 'error validating form'
-    return render(request, 'login.html', {'form': form, 'msg': msg})
+    return render(request, 'accounts/login.html', {'form': form, 'msg': msg})
 
 def user_logout_view(request):
   logout(request)
