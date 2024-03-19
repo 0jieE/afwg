@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Admin,Staff, Faculty
+from .models import User, Admin,Staff, Faculty_user, Faculty
 
 class UserAdminConfig(UserAdmin):
     model = User
@@ -45,7 +45,7 @@ class staff_config(UserAdmin):
          ),
     )
 
-class faculty_config(UserAdmin):
+class faculty_user_config(UserAdmin):
     model = User
     list_display = ('email', 'username', 'first_name','middle_name','last_name',)
     fieldsets = (
@@ -58,7 +58,11 @@ class faculty_config(UserAdmin):
          ),
     )
 
+
 admin.site.register(User,UserAdminConfig)
 admin.site.register(Admin,admin_config)
 admin.site.register(Staff,staff_config)
-admin.site.register(Faculty,faculty_config)
+admin.site.register(Faculty_user,faculty_user_config)
+@admin.register(Faculty)
+class FacultyAdmin(admin.ModelAdmin):
+    list_display=('FacultyIdNo','FacultyName','Gender','Position','Designation','DeloadUnit','Department')

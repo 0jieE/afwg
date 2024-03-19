@@ -60,35 +60,24 @@
       </li>
     {% endif %}
 
-    {% if not request.user.is_superuser %}
+    {% if request.user.admin %}
       <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
-        <a href="#" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <a href="{% url "department" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>
-            Dashboard
+            Departments
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/" class="nav-link {% if 'dashboardv1' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v1</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link {% if 'dashboardv2' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v2</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link {% if 'dashboardv3' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v3</p>
-            </a>
-          </li>
-        </ul>
+      </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "department" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Faculties
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
       </li>
     {% endif %}
 

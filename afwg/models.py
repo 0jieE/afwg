@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class User(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
@@ -75,7 +77,7 @@ class Faculty_user_Manager(BaseUserManager):
         results = super().get_queryset(*args, **kwargs)
         return results.filter(faculty=True)
     
-class Faculty(User):
+class Faculty_user(User):
 
     user = Faculty_user_Manager()
 
@@ -95,3 +97,22 @@ class Faculty(User):
     
     def welcome(self):
         return "Only for faculty user"
+    
+@receiver(post_save, sender= User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if instance.faculty == True:
+        Faculty.objects.create(FacultyName=instance,)
+    
+class Department(models.Model):
+    DepartmentName = models.CharField(max_length = 50)
+    DepartmentHead = models.CharField(max_length = 50)
+
+class Faculty(models.Model):
+    FacultyIdNo = models.CharField(max_length=50, null= True, blank = True)
+    FacultyName = models.ForeignKey(User, related_name = 'FUname',on_delete = models.CASCADE)
+    Gender = models.CharField(max_length = 50, null =True, blank = True)
+    Position = models.CharField(max_length = 50, null = True, blank = True)
+    Designation = models.CharField(max_length = 50, blank =True)
+    DeloadUnit = models.IntegerField(null =True, blank = True)
+    Department = models.ForeignKey(Department, related_name = 'FDepartment', on_delete = models.CASCADE, null =True, blank = True)
+

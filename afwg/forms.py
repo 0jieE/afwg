@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, SetPasswordForm, PasswordResetForm, UsernameField
 from django.contrib.auth.models import User
-from .models import Admin,Staff,Faculty
+from .models import Admin,Staff,Faculty_user, Department
 from django.utils.translation import gettext_lazy as _
 
 class AdminRegistrationForm(UserCreationForm):
@@ -145,7 +145,7 @@ class FacultyRegistrationForm(UserCreationForm):
                 "class": "form-control"}))
 
     class Meta:
-        model = Faculty
+        model = Faculty_user
         fields = ('username','first_name','middle_name','last_name', 'password1', 'password2')
 
 class LoginForm(forms.Form):
@@ -163,3 +163,8 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         ))
+
+class DepartmentForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ['DepartmentName','DepartmentHead']

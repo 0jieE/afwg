@@ -15,4 +15,10 @@ urlpatterns = [
     path('staff-user/',views.staff_user, name='staff-user'),
     path('faculty-user/',views.faculty_user, name='faculty-user'),
 
+    #Department
+    path('department/', views.department, name='department'),
+    path('department/add_department/', views.add_department, name='add-department'),
+    path('department/<int:pk>/edit/', views.edit_department, name='edit-department'),
+    path('department/<int:pk>/delete/', views.delete_department, name='delete-department'),
+
 ]

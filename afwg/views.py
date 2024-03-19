@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string, get_template
 from django.contrib.auth import logout,authenticate, login, update_session_auth_hash
-from .forms import AdminRegistrationForm, StaffRegistrationForm, FacultyRegistrationForm, LoginForm
+from django.http import HttpResponse, JsonResponse
+from .forms import AdminRegistrationForm, StaffRegistrationForm, FacultyRegistrationForm, LoginForm, DepartmentForm
 from django.contrib.auth import views as auth_views
-from .models import User
+from .models import User, Department
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -123,3 +124,68 @@ def register_faculty(request):
         form = FacultyRegistrationForm()
     
     return render(request, 'faculty_user/faculty_register.html', {"form": form, "msg": msg, "success": success})
+
+
+#///////////////////////////////CRUDE/////////////////////////////////////////////////////////////
+
+#________________________________________________________________________________________________________
+
+
+                        #------------department Views---------------#
+
+#________________________________________________________________________________________________________
+
+
+def department(request):
+        departments = Department.objects.all()
+        return render(request, 'admin_user/tables/department/department.html',{'departments':departments})
+
+def add_department(request):
+        if(request.method == 'POST'):
+                form = DepartmentForm(request.POST, request.FILES)
+        else:    
+                form = DepartmentForm()
+
+        return save_department(request, form, 'admin_user/tables/department/add_department.html')
+
+
+def edit_department(request,pk):
+        department = get_object_or_404(department, pk=pk)
+        if(request.method == 'POST'):
+                form = DepartmentForm(request.POST, request.FILES, instance=department)
+        else:    
+                form = DepartmentForm(instance=department)
+        return save_department(request, form, 'admin_user/tables/department/edit_department.html')
+
+
+def delete_department(request,pk):
+        department = get_object_or_404(department, pk=pk)
+        data = dict()
+        if request.method == 'POST':
+                department.delete()
+                data['form_is_valid'] = True
+                departments= department.objects.all()
+                data['department_list'] = render_to_string('admin_user/tables/department/department-list.html',{'agencies':agencies})
+        else:    
+                context = {'department':department}
+                data['html_form'] = render_to_string('admin_user/tables/department/delete_department.html',
+                context,
+                request=request)
+        return JsonResponse(data)
+
+
+def save_department(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            agencies= department.objects.all()
+            data['department_list'] = render_to_string('admin_user/tables/department/department-list.html', {'agencies':agencies})
+        else:
+            data['form_is_valid'] = False
+
+    context = {'form':form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
