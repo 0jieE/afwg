@@ -12,9 +12,11 @@
         <button class="btn btn-primary btn-sm js-edit-faculty" title="Title" data-url="{% url "edit-faculty" f.pk %}">
             <i class="fas fa-edit">Edit</i>
         </button>
+        {% if request.user.admin %}
         <button class="btn btn-primary btn-sm js-delete-faculty" title="Title1" data-url="{% url "delete-faculty" f.pk %}">
             <i class="fas fa-trash">Delete</i>
         </button>
+        {% endif %}
     </td> 
 </tr>
 {%endfor%}
