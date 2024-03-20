@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Department List</h1>
+            <h1>Faculty List</h1>
           </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -26,19 +26,24 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <button type="button" class="btn btn-sm btn-primary float-right  js-add-department" data-toggle="modal" data-target="#new-department" data-url="{% url 'add-department'%}">add</button>
+  
                         </div>
                         
-                        <table id="department-list" class="table table-bordered table-hover">
+                        <table id="faculty-list" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <td>Department Name</td>
-                                    <td>Department Head</td>
+                                    <td>Id No</td>
+                                    <td>Name</td>
+                                    <td>Gender</td>
+                                    <td>Position</td>
+                                    <td>Designation</td>
+                                    <td>Deload Unit</td>
+                                    <td>Department</td>
                                     <td>action</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                  {% include "admin_user/tables/department/department_list.html" %}
+                                  {% include "pages/list/faculty/faculty_list.html" %}
                             </tbody>
                         </table>
                     </div>
@@ -46,7 +51,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="new-department">
+    <div class="modal fade" id="new-faculty">
         <div class="modal-dialog">
           <div class="modal-content">
           </div>
@@ -92,10 +97,10 @@
             dataType: 'json',
             beforeSend: function()
             {
-                $("#new-department").modal("show");
+                $("#new-faculty").modal("show");
             },
             success: function (data) {
-                $("#new-department .modal-content").html(data.html_form);
+                $("#new-faculty .modal-content").html(data.html_form);
           }
             });
         };
@@ -113,27 +118,27 @@
             {
               if (data.form_is_valid) 
               {
-                $("#department-list tbody").html(data.department_list);
-                $("#new-department").modal("hide");
+                $("#faculty-list tbody").html(data.faculty_list);
+                $("#new-faculty").modal("hide");
               }
               else 
               {
-                $("#new-department .modal-content").html(data.html_form);
+                $("#new-faculty .modal-content").html(data.html_form);
               }
             }
           });
           return false;
         }
 
-    //add department
-    $(".js-add-department").click(loadform);
-    $("#new-department").on("submit",".js-department-create-form", saveForm);
-    //edit department
-    $("#department-list").on("click", ".js-edit-department", loadform);
-    $("#new-department").on("submit", ".js-department-edit-form", saveForm);
-    //delete department
-    $("#department-list").on("click", ".js-delete-department", loadform);
-    $("#new-department").on("submit", ".js-department-delete-form", saveForm);
+    //add faculty
+    $(".js-add-faculty").click(loadform);
+    $("#new-faculty").on("submit",".js-faculty-create-form", saveForm);
+    //edit faculty
+    $("#faculty-list").on("click", ".js-edit-faculty", loadform);
+    $("#new-faculty").on("submit", ".js-faculty-edit-form", saveForm);
+    //delete faculty
+    $("#faculty-list").on("click", ".js-delete-faculty", loadform);
+    $("#new-faculty").on("submit", ".js-faculty-delete-form", saveForm);
 
 
     ///////////////////////////////////////////////////////////

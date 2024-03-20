@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string, get_template
 from django.contrib.auth import logout,authenticate, login, update_session_auth_hash
 from django.http import HttpResponse, JsonResponse
-from .forms import AdminRegistrationForm, StaffRegistrationForm, FacultyRegistrationForm, LoginForm, DepartmentForm
+from .forms import AdminRegistrationForm, StaffRegistrationForm, FacultyRegistrationForm, LoginForm, DepartmentForm, FacultyForm
 from django.contrib.auth import views as auth_views
-from .models import User, Department
+from .models import User, Department, Faculty
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -138,24 +138,24 @@ def register_faculty(request):
 
 def department(request):
         departments = Department.objects.all()
-        return render(request, 'admin_user/tables/department/department.html',{'departments':departments})
+        return render(request, 'pages/list/department/department.html',{'departments':departments})
 
 def add_department(request):
         if(request.method == 'POST'):
-                form = DepartmentForm(request.POST, request.FILES)
+                form = DepartmentForm(request.POST)
         else:    
                 form = DepartmentForm()
 
-        return save_department(request, form, 'admin_user/tables/department/add_department.html')
+        return save_department(request, form, 'pages/list/department/add_department.html')
 
 
 def edit_department(request,pk):
         department = get_object_or_404(Department, pk=pk)
         if(request.method == 'POST'):
-                form = DepartmentForm(request.POST, request.FILES, instance=department)
+                form = DepartmentForm(request.POST, instance=department)
         else:    
                 form = DepartmentForm(instance=department)
-        return save_department(request, form, 'admin_user/tables/department/edit_department.html')
+        return save_department(request, form, 'pages/list/department/edit_department.html')
 
 
 def delete_department(request,pk):
@@ -165,25 +165,79 @@ def delete_department(request,pk):
             department.delete()
             data['form_is_valid'] = True
             departments= Department.objects.all()
-            data['department_list'] = render_to_string('admin_user/tables/department/department_list.html',{'departments':departments})
+            data['department_list'] = render_to_string('pages/list/department/department_list.html',{'departments':departments})
         else:    
             context = {'department':department}
-            data['html_form'] = render_to_string('admin_user/tables/department/delete_department.html',context,request=request)
+            data['html_form'] = render_to_string('pages/list/department/delete_department.html',context,request=request)
         return JsonResponse(data)
 
 
 def save_department(request, form, template_name):
     data = dict()
     if request.method == 'POST':
-        form = DepartmentForm(request.POST, request.FILES)
+        form = DepartmentForm(request.POST,)
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
             departments= Department.objects.all()
-            data['department_list'] = render_to_string('admin_user/tables/department/department_list.html', {'departments':departments})
+            data['department_list'] = render_to_string('pages/list/department/department_list.html', {'departments':departments})
         else:
             data['form_is_valid'] = False
 
     context = {'form':form}
     data['html_form'] = render_to_string(template_name, context, request=request)
     return JsonResponse(data)
+
+#________________________________________________________________________________________________________
+
+
+                        #------------Faculty Views---------------#
+
+#________________________________________________________________________________________________________
+
+
+def faculty(request):
+    faculties = Faculty.objects.all()
+    return render(request, 'pages/list/faculty/faculty.html',{'faculties':faculties})
+
+
+def edit_faculty(request,pk):
+    faculty = get_object_or_404(Faculty, pk=pk)
+    if(request.method == 'POST'):
+            form = FacultyForm(request.POST, instance=faculty)
+            print(2)
+    else:    
+            form = FacultyForm(instance=faculty)
+    return save_faculty(request, form, 'pages/list/faculty/faculty.html')
+
+
+def delete_faculty(request,pk):
+    faculty = get_object_or_404(Faculty, pk=pk)
+    data = dict()
+    if request.method == 'POST':
+        faculty.delete()
+        data['form_is_valid'] = True
+        faculties= Faculty.objects.all()
+        data['faculty_list'] = render_to_string('pages/list/faculty/faculty_list.html',{'faculties':faculties})
+    else:    
+        context = {'faculty':faculty}
+        data['html_form'] = render_to_string('pages/list/faculty/faculty.html',context,request=request)
+    return JsonResponse(data)
+
+
+def save_faculty(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        form = FacultyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            faculties= Faculty.objects.all()
+            data['faculty_list'] = render_to_string('pages/list/faculty/faculty_list.html', {'faculties':faculties})
+        else:
+            data['form_is_valid'] = False
+
+    context = {'form':form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+

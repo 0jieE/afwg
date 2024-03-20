@@ -98,10 +98,10 @@ class Faculty_user(User):
     def welcome(self):
         return "Only for faculty user"
     
-@receiver(post_save, sender= User)
+@receiver(post_save, sender= Faculty_user)
 def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.faculty == True:
-        Faculty.objects.create(FacultyName=instance,)
+        Faculty.objects.create(FacultyName=instance)
     
 class Department(models.Model):
     DepartmentName = models.CharField(max_length = 50)

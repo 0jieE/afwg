@@ -21,4 +21,9 @@ urlpatterns = [
     path('department/<int:pk>/edit/', views.edit_department, name='edit-department'),
     path('department/<int:pk>/delete/', views.delete_department, name='delete-department'),
 
+    #faculty
+    path('faculty/', views.faculty, name='faculty'),
+    path('faculty/<int:pk>/edit/', views.edit_faculty, name='edit-faculty'),
+    path('faculty/<int:pk>/delete/', views.delete_faculty, name='delete-faculty'),
+
 ]

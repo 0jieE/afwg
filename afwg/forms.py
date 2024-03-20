@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, SetPasswordForm, PasswordResetForm, UsernameField
 from django.contrib.auth.models import User
-from .models import Admin,Staff,Faculty_user, Department
+from .models import Admin,Staff,Faculty_user, Department,Faculty
 from django.utils.translation import gettext_lazy as _
 
 class AdminRegistrationForm(UserCreationForm):
@@ -168,3 +168,17 @@ class DepartmentForm(forms.ModelForm):
     class Meta:
         model = Department
         fields = ['DepartmentName','DepartmentHead']
+
+
+class FacultyForm(forms.ModelForm):
+    class Meta:
+        model = Faculty
+        fields = ['FacultyIdNo','Gender','Position','Designation','DeloadUnit','Department']
+        widgets = {
+            'FacultyIdNo': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Id No.'}),
+            'Gender': forms.TextInput(attrs={'rows': 3, 'class': 'form-control-sm', 'placeholder': 'Select Gender'}),
+            'Position': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Position'}),
+            'Designation': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Designatin'}),
+            'DeloadUnit': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Deload Unit'}),
+            'Department': forms.Select(attrs={'class':'form-control-sm', 'placeholder': 'Select Department'}),
+        }
