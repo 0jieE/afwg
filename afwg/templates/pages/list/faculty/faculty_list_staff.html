@@ -1,0 +1,17 @@
+{%for f in faculties %}
+<tr>
+    <td>{{f.FacultyIdNo}}</td>
+    <td>{{f.FacultyName}}</td>
+    <td>{{f.Gender}}</td>
+    <td>{{f.Position}}</td>
+    <td>{{f.Designation}}</td>
+    <td>{{f.DeloadUnit}}</td>
+    <td>{{f.Department}}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm js-edit-faculty" title="Title" data-url="{% url "edit-faculty" f.pk %}">
+            Edit
+        </button>
+    </td> 
+</tr>
+{%endfor%}

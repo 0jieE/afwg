@@ -1,0 +1,15 @@
+{%for d in department_course %}
+<tr>
+    <td>{{d.Department}}</td>
+    <td>{{d.Course}}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm js-edit-department-course" data-url="{% url "edit-department-course" d.pk %}">
+            Edit
+        </button>
+        <button class="btn btn-sm btn-danger js-delete-department-course" data-url="{% url "delete-department-course" d.pk %}">
+            Delete
+        </button>
+    </td>
+</tr>
+{%endfor%}

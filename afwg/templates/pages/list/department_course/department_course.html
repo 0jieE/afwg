@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Faculty List</h1>
+            <h1>Department-course Course List</h1>
           </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -26,27 +26,23 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-  
+        
+                          <button type="button" class="btn btn-sm btn-primary float-right  js-add-department-course" data-toggle="modal" data-target="#new-department-course" data-url="{% url 'add-department-course'%}">add</button>
                         </div>
                         
-                        <table id="faculty-list" class="table table-bordered table-hover">
+                        <table id="department-course-list" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <td>Id No</td>
-                                    <td>Name</td>
-                                    <td>Gender</td>
-                                    <td>Position</td>
-                                    <td>Designation</td>
-                                    <td>Deload Unit</td>
                                     <td>Department</td>
+                                    <td>Course</td>
                                     <td>action</td>
                                 </tr>
                             </thead>
                             <tbody>
                               {% if request.user.admin %}
-                                {% include "pages/list/faculty/faculty_list_admin.html" %}
+                                {% include "pages/list/department_course/department_course_list_admin.html" %}
                               {% elif request.user.staff %}
-                                {% include "pages/list/faculty/faculty_list_staff.html" %}
+                                {% include "pages/list/department_course/department_course_list_staff.html" %}
                               {% endif %}
                             </tbody>
                         </table>
@@ -55,7 +51,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="new-faculty">
+    <div class="modal fade" id="new-department-course">
         <div class="modal-dialog">
           <div class="modal-content">
           </div>
@@ -101,10 +97,10 @@
             dataType: 'json',
             beforeSend: function()
             {
-                $("#new-faculty").modal("show");
+                $("#new-department-course").modal("show");
             },
             success: function (data) {
-                $("#new-faculty .modal-content").html(data.html_form);
+                $("#new-department-course .modal-content").html(data.html_form);
           }
             });
         };
@@ -122,27 +118,27 @@
             {
               if (data.form_is_valid) 
               {
-                $("#faculty-list tbody").html(data.faculty_list);
-                $("#new-faculty").modal("hide");
+                $("#department-course-list tbody").html(data.department_course_list);
+                $("#new-department-course").modal("hide");
               }
               else 
               {
-                $("#new-faculty .modal-content").html(data.html_form);
+                $("#new-department-course .modal-content").html(data.html_form);
               }
             }
           });
           return false;
         }
 
-    //add faculty
-    $(".js-add-faculty").click(loadform);
-    $("#new-faculty").on("submit",".js-faculty-create-form", saveForm);
-    //edit faculty
-    $("#faculty-list").on("click", ".js-edit-faculty", loadform);
-    $("#new-faculty").on("submit", ".js-faculty-edit-form", saveForm);
-    //delete faculty
-    $("#faculty-list").on("click", ".js-delete-faculty", loadform);
-    $("#new-faculty").on("submit", ".js-faculty-delete-form", saveForm);
+    //add department-course
+    $(".js-add-department-course").click(loadform);
+    $("#new-department-course").on("submit",".js-department-course-create-form", saveForm);
+    //edit department-course
+    $("#department-course-list").on("click", ".js-edit-department-course", loadform);
+    $("#new-department-course").on("submit", ".js-department-course-edit-form", saveForm);
+    //delete department-course
+    $("#department-course-list").on("click", ".js-delete-department-course", loadform);
+    $("#new-department-course").on("submit", ".js-department-course-delete-form", saveForm);
 
 
     ///////////////////////////////////////////////////////////

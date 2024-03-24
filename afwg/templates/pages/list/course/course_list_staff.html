@@ -1,0 +1,17 @@
+{%for c in courses %}
+<tr>
+    <td>{{c.Course_Code}}</td>
+    <td>{{c.Descriptive_Title}}</td>
+    <td>{{c.Unit_Lec}}</td>
+    <td>{{c.Unit_Lab}}</td>
+    <td>{{c.Credit_Unit}}</td>
+    <td>{{c.Hours_Lec}}</td>
+    <td>{{c.Hours_Lab}}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm js-edit-course" data-url="{% url "edit-course" c.pk %}">
+            Edit
+        </button>
+    </td>
+</tr>
+{%endfor%}

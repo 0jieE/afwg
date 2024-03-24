@@ -26,4 +26,35 @@ urlpatterns = [
     path('faculty/<int:pk>/edit/', views.edit_faculty, name='edit-faculty'),
     path('faculty/<int:pk>/delete/', views.delete_faculty, name='delete-faculty'),
 
+    #room
+    path('room/', views.room, name='room'),
+    path('room/add_room/', views.add_room, name='add-room'),
+    path('room/<int:pk>/edit/', views.edit_room, name='edit-room'),
+    path('room/<int:pk>/delete/', views.delete_room, name='delete-room'),
+
+    #Schedule
+    path('schedule/', views.schedule, name='schedule'),
+    path('schedule/add_schedule/', views.add_schedule, name='add-schedule'),
+    path('schedule/<int:pk>/edit/', views.edit_schedule, name='edit-schedule'),
+    path('schedule/<int:pk>/delete/', views.delete_schedule, name='delete-schedule'),
+
+    #Course
+    path('course/', views.course, name='course'),
+    path('course/add_course/', views.add_course, name='add-course'),
+    path('course/<int:pk>/edit/', views.edit_course, name='edit-course'),
+    path('course/<int:pk>/delete/', views.delete_course, name='delete-course'),
+
+    #Department-Course
+    path('department-course/', views.department_course, name='department-course'),
+    path('department-course/add_department-course/', views.add_department_course, name='add-department-course'),
+    path('department-course/<int:pk>/edit/', views.edit_department_course, name='edit-department-course'),
+    path('department-course/<int:pk>/delete/', views.delete_department_course, name='delete-department-course'),
+
+    #Instructor-Course
+    path('instructor/', views.instructor, name='instructor'),
+    path('instructor/add_instructor/', views.add_instructor, name='add-instructor'),
+    path('instructor/<int:pk>/edit/', views.edit_instructor, name='edit-instructor'),
+    path('instructor/<int:pk>/delete/', views.delete_instructor, name='delete-instructor'),
+
+
 ]

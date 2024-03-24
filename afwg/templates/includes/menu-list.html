@@ -79,6 +79,51 @@
           </p>
         </a>
       </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "room" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Rooms
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "schedule" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Time Schedule
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "course" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Course
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "department-course" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Department Course
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+        <a href="{% url "instructor" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            instructor Course
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
     {% endif %}
 
     {% if request.user.staff %}
@@ -96,6 +141,51 @@
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
           Faculties
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+    </li>
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="{% url "room" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Rooms
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+    </li>
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="{% url "schedule" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Time Schedule
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+    </li>
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="{% url "course" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Course
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+    </li>
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="{% url "department-course" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Department Course
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+    </li>
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="{% url "instructor" %}" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          instructor Course
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>

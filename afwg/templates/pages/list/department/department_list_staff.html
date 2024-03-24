@@ -1,0 +1,12 @@
+{%for d in departments %}
+<tr>
+    <td>{{d.DepartmentName}}</td>
+    <td>{{d.DepartmentHead}}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm js-edit-department" data-url="{% url "edit-department" d.pk %}">
+            Edit
+        </button>
+    </td>
+</tr>
+{%endfor%}

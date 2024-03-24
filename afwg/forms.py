@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, SetPasswordForm, PasswordResetForm, UsernameField
 from django.contrib.auth.models import User
-from .models import Admin,Staff,Faculty_user, Department,Faculty
+from .models import Admin,Staff,Faculty_user, Department,Faculty,Room,Time_Schedule,Course,Department_Course,Instructor_Course
 from django.utils.translation import gettext_lazy as _
 
 class AdminRegistrationForm(UserCreationForm):
@@ -173,8 +173,9 @@ class DepartmentForm(forms.ModelForm):
 class FacultyForm(forms.ModelForm):
     class Meta:
         model = Faculty
-        fields = ['FacultyIdNo','Gender','Position','Designation','DeloadUnit','Department']
+        fields = ['FacultyIdNo','FacultyName','Gender','Position','Designation','DeloadUnit','Department']
         widgets = {
+            'FacultyName':forms.HiddenInput(),
             'FacultyIdNo': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Id No.'}),
             'Gender': forms.TextInput(attrs={'rows': 3, 'class': 'form-control-sm', 'placeholder': 'Select Gender'}),
             'Position': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Position'}),
@@ -182,3 +183,28 @@ class FacultyForm(forms.ModelForm):
             'DeloadUnit': forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Deload Unit'}),
             'Department': forms.Select(attrs={'class':'form-control-sm', 'placeholder': 'Select Department'}),
         }
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = ['Number','Capacity']
+
+class Time_ScheduleForm(forms.ModelForm):
+    class Meta:
+        model = Time_Schedule
+        fields = ['Schedule',]
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['Course_Code','Descriptive_Title','Unit_Lec','Unit_Lab','Credit_Unit','Hours_Lec','Hours_Lab']
+
+class Department_CourseForm(forms.ModelForm):
+    class Meta:
+        model = Department_Course
+        fields = ['Department','Course']
+
+class Instructor_CourseForm(forms.ModelForm):
+    class Meta:
+        model = Instructor_Course
+        fields = ['Course','Instructor']

@@ -1,0 +1,14 @@
+{%for s in schedule %}
+<tr>
+    <td>{{s.Schedule}}</td>
+
+    <td>
+        <button class="btn btn-primary btn-sm js-edit-schedule" data-url="{% url "edit-schedule" s.pk %}">
+            Edit
+        </button>
+        <button class="btn btn-sm btn-danger js-delete-schedule" data-url="{% url "delete-department" s.pk %}">
+            Delete
+        </button>
+    </td>
+</tr>
+{%endfor%}

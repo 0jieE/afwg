@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Admin,Staff, Faculty_user, Faculty
+from .models import User, Admin,Staff, Faculty_user, Faculty,Room, Time_Schedule, Course, Department_Course, Instructor_Course
 
 class UserAdminConfig(UserAdmin):
     model = User
@@ -66,3 +66,23 @@ admin.site.register(Faculty_user,faculty_user_config)
 @admin.register(Faculty)
 class FacultyAdmin(admin.ModelAdmin):
     list_display=('FacultyIdNo','FacultyName','Gender','Position','Designation','DeloadUnit','Department')
+
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display=('Number','Capacity')
+
+@admin.register(Time_Schedule)
+class TimeScheduleAdmin(admin.ModelAdmin):
+    list_display=('Schedule',)
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display=('Course_Code','Descriptive_Title','Unit_Lec','Unit_Lab','Credit_Unit','Hours_Lec','Hours_Lab')
+
+@admin.register(Department_Course)
+class Department_CourseAdmin(admin.ModelAdmin):
+    list_display=('Department','Course')
+
+@admin.register(Instructor_Course)
+class Instructor_CourseAdmin(admin.ModelAdmin):
+    list_display=('Instructor','Course')

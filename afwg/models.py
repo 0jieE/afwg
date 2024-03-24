@@ -107,6 +107,10 @@ class Department(models.Model):
     DepartmentName = models.CharField(max_length = 50)
     DepartmentHead = models.CharField(max_length = 50)
 
+    def __str__(self):
+        template = '{0.DepartmentName}'
+        return template.format(self)
+
 class Faculty(models.Model):
     FacultyIdNo = models.CharField(max_length=50, null= True, blank = True)
     FacultyName = models.ForeignKey(User, related_name = 'FUname',on_delete = models.CASCADE)
@@ -116,3 +120,38 @@ class Faculty(models.Model):
     DeloadUnit = models.IntegerField(null =True, blank = True)
     Department = models.ForeignKey(Department, related_name = 'FDepartment', on_delete = models.CASCADE, null =True, blank = True)
 
+    def __str__(self):
+        template = '{0.FacultyIdNo} {0.FacultyName}'
+        return template.format(self)
+
+class Room(models.Model):
+    Number = models.CharField(max_length=20)
+    Capacity = models.CharField(max_length=20)
+
+class Time_Schedule(models.Model):
+    Schedule = models.CharField(max_length=20)
+
+    def __str__(self):
+        template = '{0.Schedule}'
+        return template.format(self)
+
+class Course(models.Model):
+    Course_Code = models.CharField(max_length = 50)
+    Descriptive_Title = models.CharField(max_length = 50)
+    Unit_Lec = models.IntegerField(default = 0)
+    Unit_Lab = models.IntegerField(default = 0)
+    Credit_Unit = models.IntegerField(default = 0)
+    Hours_Lec = models.DecimalField(max_digits = 4, decimal_places = 2, default = 0.0)
+    Hours_Lab = models.DecimalField(max_digits = 4, decimal_places = 2, default = 0.0)
+
+    def __str__(self):
+        template = '{0.Course_Code}-{0.Descriptive_Title}'
+        return template.format(self)
+
+class Department_Course(models.Model):
+    Department = models.ForeignKey(Department,related_name='department_name', on_delete=models.CASCADE)
+    Course = models.ForeignKey(Course,related_name = 'course_name', on_delete=models.CASCADE)
+
+class Instructor_Course(models.Model):
+    Course = models.ForeignKey(Course,related_name = 'intructor_course', on_delete=models.CASCADE, null=True, blank=True)
+    Instructor = models.ForeignKey(Faculty, related_name = 'course_intructor_name', on_delete=models.CASCADE)

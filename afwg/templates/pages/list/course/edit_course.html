@@ -1,35 +1,34 @@
 {%load crispy_forms_tags%}
 
-<form method='post' action="{%url 'edit-faculty' form.instance.pk%}" class="js-faculty-edit-form">
+<form method='post' action="{%url 'edit-course' form.instance.pk%}" class="js-course-edit-form">
     {% csrf_token %}
     <div class="modal-header">
-        <h4 class="modal-title">Edit Faculty</h4>
+        <h4 class="modal-title">Edit course</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        
         <div class="col-md-12">
-            {{form.FacultyName|as_crispy_field}}
+            {{form.Course_Code|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.FacultyIdNo|as_crispy_field}}
+            {{form.Descriptive_Title|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.Gender|as_crispy_field}}
+            {{form.Unit_Lec|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.Position|as_crispy_field}}
+            {{form.Unit_Lab|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.Designation|as_crispy_field}}
+            {{form.Credit_Unit|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.DeloadUnit|as_crispy_field}}
+            {{form.Hours_Lab|as_crispy_field}}
         </div>
         <div class="col-md-12">
-            {{form.Department|as_crispy_field}}
+            {{form.Hours_Lec|as_crispy_field}}
         </div>
     </div>
     <div class="modal-footer justify-content-between">

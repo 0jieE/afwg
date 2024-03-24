@@ -39,7 +39,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                  {% include "pages/list/department/department_list.html" %}
+                              {% if request.user.admin %}
+                                {% include "pages/list/department/department_list_admin.html" %}
+                              {% elif request.user.staff %}
+                                {% include "pages/list/department/department_list_staff.html" %}
+                              {% endif %}
                             </tbody>
                         </table>
                     </div>
